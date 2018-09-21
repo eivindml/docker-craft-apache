@@ -1,3 +1,10 @@
+# Build deps
+FROM composer:latest as vendor
+
+COPY database/ database/
+COPY composer.json composer.json
+COPY composer.lock composer.lock
+
 FROM php:7.1-apache
 
 RUN apt-get update \
@@ -10,12 +17,13 @@ RUN apt-get update \
 # Enable .htaccess
 RUN a2enmod rewrite
 
+COPY --from=vendor /app/vendor /var/www/vendor
+
 # Copy over Craft files
 COPY config/ /var/www/config
 COPY modules/ /var/www/modules
 COPY storage/ /var/www/storage
 COPY templates/ /var/www/templates
-COPY vendor/ /var/www/vendor
 COPY storage/ /var/www/storage
 COPY web/ /var/www/html
 

@@ -7,7 +7,6 @@ services:
       - ./web/:/var/www/html/
       - ./templates/:/var/www/templates/
       - ./config/:/var/www/config/
-      - ./vendor/:/var/www/vendor/
       - ./storage/:/var/www/storage/
       - ./translations/:/var/www/translations/
       - ./composer.json:/var/www/composer.json
